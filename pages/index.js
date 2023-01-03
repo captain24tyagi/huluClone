@@ -2,10 +2,15 @@ import Head from 'next/head'
 import Image from 'next/image'
 // import { Inter } from '@next/font/google'
 import Header from '../components/Header'
-
+import Nav from '../components/Nav'
+import Results from '../components/Results'
+import movies from "../utils/requests";
 // const inter = Inter({ subsets: ['latin'] })
 
-export default function Home() {
+// client side rendering
+
+export default function Home({ results }) {
+  
   return (
     <>
       <Head>
@@ -19,8 +24,28 @@ export default function Home() {
       <Header/>
 
       {/* {Nav} */}
-
+      <Nav/>
       {/* {Results} */}
+      <Results results={results}/>
     </>
   )
+}
+
+//Server side rendering
+
+export async function getServerSideProps(context){
+  const genre = context.query.genre;
+
+  const request = await fetch(`https://api.themoviedb.org/3${
+    movies[genre]?.url || movies.fetchTrending.url
+  }`
+  ).then(res => res.json());
+
+  return{
+    props: {
+      results: request.results,
+    }
+  }
+// props are used as the movies are first rendered over server side
+// and then are send for client side rendering
 }

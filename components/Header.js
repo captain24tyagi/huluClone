@@ -11,8 +11,8 @@ import{
 from "@heroicons/react/outline";
 function Header() {
   return (
-    <header className="flex flex-col md:flex-row m-5 justify-between items-center">
-        <div className="flex flex-grow justify-evenly max-w-2xl">
+    <header className="flex flex-col mb-20 md:flex-row m-5 justify-between items-center">
+        <div className="flex flex-grow justify-evenly max-w-3xl">
             <HeaderItems 
                 title='HOME'
                 Icon={HomeIcon}
@@ -39,7 +39,7 @@ function Header() {
             />
         </div>
         <Image
-            className="object-contain text-blue-600"
+            className="object-contain text-blue-600 mr-5"
             src="https://links.papareact.com/ua6"
             width={200}
             height={100}
